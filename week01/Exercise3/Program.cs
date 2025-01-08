@@ -17,7 +17,7 @@ class Program
 
             Console.WriteLine("\n🎉 Welcome to the 'Guess My Number' game 🎉");
             Console.WriteLine("I have chosen a magic number between 1 and 100.");
-            Console.WriteLine("Can you guess what it is? Let's find out!\n");
+            Console.WriteLine("Can you guess what it is? Let's find out\n");
 
             do
             {
@@ -35,7 +35,7 @@ class Program
                 }
                 else
                 {
-                    Console.WriteLine($"\n🎊 Congratulations! You guessed the magic number in {attempts} attempts 🎊");
+                    Console.WriteLine($"\n🎊 Congratulations. You guessed the magic number in {attempts} attempts 🎊");
                 }
             } while (guess != magicNumber);
 
