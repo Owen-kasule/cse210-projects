@@ -15,11 +15,11 @@ class Program
             int guess;
             int attempts = 0;
 
-            Console.WriteLine("Welcome to the Guess My Number game!");
+            Console.WriteLine("Welcome to the Guess My Number game.");
             
             do
             {
-                Console.Write("What is your guess? ");
+                Console.Write("What is your guess? (From 1 to 100): ");
                 guess = int.Parse(Console.ReadLine());
                 attempts++;
 
