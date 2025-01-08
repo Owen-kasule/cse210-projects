@@ -33,14 +33,13 @@ class Program
                 }
                 else
                 {
-                    Console.WriteLine($"You guessed it! It took you {attempts} attempts.");
-                }
-            } while (guess != magicNumber);
+                    Console.WriteLine($"You guessed it right, It took you {attempts} attempts.");
+                ee
 
             Console.Write("Do you want to play again (yes/no)? ");
             playAgain = Console.ReadLine().ToLower();
         } while (playAgain == "yes");
         
-        Console.WriteLine("Thanks for playing!");
+        Console.WriteLine("Thanks for playing");
     }
 }
