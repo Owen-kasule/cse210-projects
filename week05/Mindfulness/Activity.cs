@@ -22,7 +22,7 @@ public abstract class Activity
 
     public void DisplayEndingMessage()
     {
-        Console.WriteLine($"Good job! You completed the {_name} activity for {_duration} seconds.\n");
+        Console.WriteLine($"Good job, You completed the {_name} activity for {_duration} seconds.\n");
     }
 
     public void ShowSpinner(int seconds)

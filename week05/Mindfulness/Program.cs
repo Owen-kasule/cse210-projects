@@ -30,7 +30,7 @@ class Program
                     reflecting.Run();
                     break;
                 case "4":
-                    Console.WriteLine("Goodbye!");
+                    Console.WriteLine("Goodbye");
                     return;
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
