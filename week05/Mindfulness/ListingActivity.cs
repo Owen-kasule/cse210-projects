@@ -8,36 +8,31 @@ public class ListingActivity : Activity
         "Who are people that you appreciate?",
         "What are your personal strengths?",
         "Who have you helped this week?",
-        "When have you felt the Holy Ghost recently?",
-        "Who are your personal heroes?"
+        "What are things you are grateful for?"
     };
 
-    public ListingActivity() 
-        : base("Listing Activity", "This activity encourages you to reflect on good things in your life by listing them.")
-    { }
-
-    public override void Run()
+    public ListingActivity() : base("Listing Activity", "This activity helps you reflect by listing positive things in your life.")
     {
-        DisplayStartingMessage();
-        Console.WriteLine(GetRandomPrompt());
-        ShowCountDown(5);
-
-        List<string> userItems = new List<string>();
-        DateTime endTime = DateTime.Now.AddSeconds(_duration);
-
-        Console.WriteLine("Start listing items:");
-        while (DateTime.Now < endTime)
-        {
-            userItems.Add(Console.ReadLine());
-        }
-
-        Console.WriteLine($"You listed {userItems.Count} items.");
-        DisplayEndingMessage();
     }
 
-    private string GetRandomPrompt()
+    public void Run()
     {
-        Random random = new Random();
-        return _prompts[random.Next(_prompts.Count)];
+        DisplayStartingMessage();
+        Random rand = new Random();
+        string prompt = _prompts[rand.Next(_prompts.Count)];
+
+        Console.WriteLine(prompt);
+        Console.WriteLine("List as many items as you can. Press Enter after each one.");
+        DateTime endTime = DateTime.Now.AddSeconds(GetDuration());
+
+        List<string> responses = new List<string>();
+        while (DateTime.Now < endTime)
+        {
+            string response = Console.ReadLine();
+            responses.Add(response);
+        }
+
+        Console.WriteLine($"You listed {responses.Count} items!");
+        DisplayEndingMessage();
     }
 }
