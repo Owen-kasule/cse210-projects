@@ -13,47 +13,39 @@ public abstract class Activity
         _description = description;
     }
 
-    public void SetDuration(int duration)
-    {
-        _duration = duration;
-    }
-
     public void DisplayStartingMessage()
     {
-        Console.WriteLine($"\nStarting {_name}...");
-        Console.WriteLine(_description);
-        Console.WriteLine($"This activity will last {_duration} seconds.");
-        Console.WriteLine("Prepare to begin...");
-        ShowSpinner(3);
+        Console.WriteLine($"Starting {_name}...\n{_description}");
+        Console.Write("Enter duration (seconds): ");
+        _duration = int.Parse(Console.ReadLine());
     }
 
     public void DisplayEndingMessage()
     {
-        Console.WriteLine("\nWell done!");
-        Console.WriteLine($"You have completed the {_name} activity for {_duration} seconds.");
-        ShowSpinner(3);
+        Console.WriteLine($"Good job! You completed the {_name} activity for {_duration} seconds.\n");
     }
 
     public void ShowSpinner(int seconds)
     {
-        string[] spinnerChars = { "/", "-", "\\", "|" };
-        for (int i = 0; i < seconds * 4; i++)
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(seconds);
+
+        while (DateTime.Now < endTime)
         {
-            Console.Write(spinnerChars[i % spinnerChars.Length]);
-            Thread.Sleep(250);
+            Console.Write("|");
+            Thread.Sleep(200);
+            Console.Write("\b \b/");
+            Thread.Sleep(200);
+            Console.Write("\b \b-");
+            Thread.Sleep(200);
+            Console.Write("\b \b\\");
+            Thread.Sleep(200);
             Console.Write("\b \b");
         }
-        Console.WriteLine();
     }
 
-    public void ShowCountDown(int seconds)
+    public int GetDuration()
     {
-        for (int i = seconds; i > 0; i--)
-        {
-            Console.WriteLine($"{i}...");
-            Thread.Sleep(1000);
-        }
+        return _duration;
     }
-
-    public abstract void Run();
 }
