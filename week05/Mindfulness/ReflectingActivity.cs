@@ -6,46 +6,38 @@ public class ReflectingActivity : Activity
     private List<string> _prompts = new List<string>
     {
         "Think of a time when you stood up for someone.",
-        "Think of a time when you accomplished something difficult.",
+        "Think of a time when you did something difficult.",
         "Think of a time when you helped someone in need."
     };
 
     private List<string> _questions = new List<string>
     {
         "Why was this experience meaningful to you?",
-        "How did you get started?",
-        "What did you learn from this experience?"
+        "How did you feel during this experience?",
+        "What did you learn from this experience?",
+        "How can this experience help you in the future?"
     };
 
-    public ReflectingActivity() 
-        : base("Reflecting Activity", "This activity helps you reflect on personal growth and strength.")
-    { }
+    public ReflectingActivity() : base("Reflecting Activity", "This activity helps you reflect on times when you showed strength.")
+    {
+    }
 
-    public override void Run()
+    public void Run()
     {
         DisplayStartingMessage();
-        Console.WriteLine(GetRandomPrompt());
-        ShowSpinner(3);
+        Random rand = new Random();
 
-        DateTime endTime = DateTime.Now.AddSeconds(_duration);
+        string prompt = _prompts[rand.Next(_prompts.Count)];
+        Console.WriteLine($"Prompt: {prompt}\n");
+
+        DateTime endTime = DateTime.Now.AddSeconds(GetDuration());
         while (DateTime.Now < endTime)
         {
-            Console.WriteLine(GetRandomQuestion());
-            ShowSpinner(5);
+            string question = _questions[rand.Next(_questions.Count)];
+            Console.WriteLine(question);
+            ShowSpinner(3);
         }
 
         DisplayEndingMessage();
-    }
-
-    private string GetRandomPrompt()
-    {
-        Random random = new Random();
-        return _prompts[random.Next(_prompts.Count)];
-    }
-
-    private string GetRandomQuestion()
-    {
-        Random random = new Random();
-        return _questions[random.Next(_questions.Count)];
     }
 }
