@@ -22,7 +22,7 @@ class Program
 
         Resume myResume = new Resume
         {
-            _personName = "Allison Rose"
+            _personName = "Owen Kasule"
         };
         myResume._jobs.Add(job1);
         myResume._jobs.Add(job2);
