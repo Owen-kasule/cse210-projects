@@ -55,7 +55,7 @@ class Program
                     return;
 
                 default:
-                    Console.WriteLine("Invalid option. Please try again.");
+                    Console.WriteLine("Invalid option. Please try again..");
                     break;
             }
         }
