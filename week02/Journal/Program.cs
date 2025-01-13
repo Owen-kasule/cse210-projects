@@ -62,7 +62,7 @@ class Program
             }
             else if (choice == "5")
             {
-                Console.WriteLine("Goodbye!");
+                Console.WriteLine("Goodbye");
                 break;
             }
             else
