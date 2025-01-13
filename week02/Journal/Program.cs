@@ -12,7 +12,7 @@ class Program
 
         while (true)
         {
-            Console.WriteLine("Journal Menu:");
+            Console.WriteLine("\nJournal Menu:");
             Console.WriteLine("1. Write a new entry");
             Console.WriteLine("2. Display the journal");
             Console.WriteLine("3. Save the journal to a file");
@@ -24,15 +24,17 @@ class Program
             if (choice == "1")
             {
                 string prompt = promptGenerator.GetRandomPrompt();
-                Console.WriteLine(prompt);
+                Console.WriteLine($"\nPrompt: {prompt}");
                 Console.Write("Your response: ");
                 string response = Console.ReadLine();
                 string date = DateTime.Now.ToShortDateString();
                 Entry newEntry = new Entry(date, prompt, response);
                 journal.AddEntry(newEntry);
+                Console.WriteLine("Entry added successfully.");
             }
             else if (choice == "2")
             {
+                Console.WriteLine("\nDisplaying all journal entries:");
                 journal.DisplayAll();
             }
             else if (choice == "3")
@@ -40,14 +42,23 @@ class Program
                 Console.Write("Enter filename to save (e.g., journal.txt): ");
                 string fileName = Console.ReadLine();
                 journal.SaveToFile(fileName);
-                Console.WriteLine("Journal saved.");
+                Console.WriteLine("Journal saved successfully.");
             }
             else if (choice == "4")
             {
                 Console.Write("Enter filename to load (e.g., journal.txt): ");
                 string fileName = Console.ReadLine();
-                journal.LoadFromFile(fileName);
-                Console.WriteLine("Journal loaded.");
+                try
+                {
+                    journal.LoadFromFile(fileName);
+                    Console.WriteLine("\nJournal loaded successfully.");
+                    Console.WriteLine("\nDisplaying loaded journal entries:");
+                    journal.DisplayAll(); // Automatically display entries after loading
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error loading journal: {ex.Message}");
+                }
             }
             else if (choice == "5")
             {
