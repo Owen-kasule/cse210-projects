@@ -26,6 +26,7 @@ class Program
             string input = Console.ReadLine();
             if (input.ToLower() == "quit")
             {
+                Console.WriteLine("\nThank you for using the Scripture Memorizer. Goodbye!");
                 break;
             }
 
@@ -34,9 +35,14 @@ class Program
             if (selectedScripture.IsCompletelyHidden())
             {
                 Console.Clear();
-                Console.WriteLine("All words are hidden. Well done!");
+                Console.WriteLine(selectedScripture.GetDisplayText());
+                Console.WriteLine("\nAll words are hidden. Well done!");
                 break;
             }
         }
+
+        // Close program gracefully
+        Console.WriteLine("\nPress any key to close the program...");
+        Console.ReadKey();
     }
 }
