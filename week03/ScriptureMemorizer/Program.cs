@@ -11,7 +11,7 @@ class Program
         Scripture scripture = new Scripture(reference, text);
 
         Console.Clear();
-        Console.WriteLine("Welcome to the Scripture Memorizer Program!");
+        Console.WriteLine("Welcome to the Scripture Memorizer Program");
         Console.WriteLine("Press Enter to hide words or type 'quit' to exit.\n");
 
         while (true)
@@ -28,13 +28,13 @@ class Program
             if (scripture.IsCompletelyHidden())
             {
                 Console.Clear();
-                Console.WriteLine("All words are now hidden. Well done!");
+                Console.WriteLine("All words are now hidden. Well done");
                 break;
             }
 
             Console.Clear();
         }
 
-        Console.WriteLine("Thank you for using the Scripture Memorizer Program!");
+        Console.WriteLine("Thank you for using the Scripture Memorizer Program");
     }
 }
