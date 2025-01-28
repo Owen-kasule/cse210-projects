@@ -1,4 +1,4 @@
-public class Word
+class Word
 {
     private string _text;
     private bool _isHidden;
@@ -9,14 +9,14 @@ public class Word
         _isHidden = false;
     }
 
+    public string GetDisplayText()
+    {
+        return _isHidden ? new string('_', _text.Length) : _text;
+    }
+
     public void Hide()
     {
         _isHidden = true;
-    }
-
-    public void Show()
-    {
-        _isHidden = false;
     }
 
     public bool IsHidden()
@@ -24,8 +24,8 @@ public class Word
         return _isHidden;
     }
 
-    public string GetDisplayText()
+    public string GetHint()
     {
-        return _isHidden ? new string('_', _text.Length) : _text;
+        return _isHidden ? _text[0] + new string('_', _text.Length - 1) : _text;
     }
 }
