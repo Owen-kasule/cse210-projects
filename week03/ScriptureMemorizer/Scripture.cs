@@ -14,7 +14,7 @@ public class Scripture
         SetWords(text);
     }
 
-    // Method to set words by splitting the input text and creating Word objects
+    // Method to split the text and create Word objects
     private void SetWords(string text)
     {
         string[] wordsArray = text.Split(' ');
