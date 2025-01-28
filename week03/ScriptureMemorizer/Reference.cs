@@ -5,7 +5,6 @@ public class Reference
     private int _startVerse;
     private int _endVerse;
 
-    // Constructor for a single verse
     public Reference(string book, int chapter, int verse)
     {
         _book = book;
@@ -14,7 +13,6 @@ public class Reference
         _endVerse = verse;
     }
 
-    // Constructor for a range of verses
     public Reference(string book, int chapter, int startVerse, int endVerse)
     {
         _book = book;
@@ -23,7 +21,6 @@ public class Reference
         _endVerse = endVerse;
     }
 
-    // Method to get the display text for the reference
     public string GetDisplayText()
     {
         if (_startVerse == _endVerse)
