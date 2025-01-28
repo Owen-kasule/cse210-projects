@@ -1,40 +1,51 @@
 using System;
+using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Scripture reference and text
-        Reference reference = new Reference("John", 3, 16);
-        string text = "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.";
+        ScriptureLibrary library = new ScriptureLibrary();
+        Console.WriteLine("Welcome to the Scripture Memorizer Program!");
+        Console.WriteLine("Please choose a scripture to memorize:");
+        library.DisplayScriptures();
 
-        Scripture scripture = new Scripture(reference, text);
+        int choice = int.Parse(Console.ReadLine());
+        Scripture scripture = library.GetScripture(choice);
 
-        Console.Clear();
-        Console.WriteLine("Welcome to the Scripture Memorizer Program");
-        Console.WriteLine("Press Enter to hide words or type 'quit' to exit.\n");
+        Console.WriteLine("Choose a difficulty level (1 = Easy, 2 = Medium, 3 = Hard):");
+        int difficulty = int.Parse(Console.ReadLine());
+        int wordsToHide = difficulty == 1 ? 1 : difficulty == 2 ? 3 : 5;
 
         while (true)
         {
+            Console.Clear();
             Console.WriteLine(scripture.GetDisplayText());
-            Console.WriteLine("\nPress Enter to hide words or type 'quit' to exit.");
-            string input = Console.ReadLine();
+            Console.WriteLine("\nPress Enter to hide words or type 'hint' for help. Type 'quit' to exit.");
+            string input = Console.ReadLine().ToLower();
 
-            if (input.ToLower() == "quit")
-                break;
-
-            scripture.HideRandomWords(3);
-
-            if (scripture.IsCompletelyHidden())
+            if (input == "quit")
             {
-                Console.Clear();
-                Console.WriteLine("All words are now hidden. Well done");
+                Console.WriteLine("Goodbye!");
                 break;
             }
-
-            Console.Clear();
+            else if (input == "hint")
+            {
+                Console.WriteLine("Hint: " + scripture.GetHint());
+                Console.WriteLine("Press Enter to continue...");
+                Console.ReadLine();
+            }
+            else
+            {
+                scripture.HideRandomWords(wordsToHide);
+                if (scripture.IsCompletelyHidden())
+                {
+                    Console.Clear();
+                    Console.WriteLine("Congratulations! You have memorized the scripture:");
+                    Console.WriteLine(scripture.GetDisplayText());
+                    break;
+                }
+            }
         }
-
-        Console.WriteLine("Thank you for using the Scripture Memorizer Program");
     }
 }
