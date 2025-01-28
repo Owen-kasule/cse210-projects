@@ -29,7 +29,7 @@ class Program
             if (scripture.IsCompletelyHidden())
             {
                 Console.Clear();
-                Console.WriteLine("All words are hidden.");
+                Console.WriteLine("All words are hidden. Well done!");
                 break;
             }
         }
