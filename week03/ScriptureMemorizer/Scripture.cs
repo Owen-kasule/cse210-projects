@@ -1,31 +1,41 @@
 using System;
 using System.Collections.Generic;
 
-class Scripture
+public class Scripture
 {
     private Reference _reference;
     private List<Word> _words;
 
+    // Constructor to initialize the Scripture with a reference and text
     public Scripture(Reference reference, string text)
     {
         _reference = reference;
         _words = new List<Word>();
-        foreach (string word in text.Split(' '))
+        SetWords(text);
+    }
+
+    // Method to set words by splitting the input text and creating Word objects
+    private void SetWords(string text)
+    {
+        string[] wordsArray = text.Split(' ');
+        foreach (string word in wordsArray)
         {
             _words.Add(new Word(word));
         }
     }
 
+    // Method to get the full scripture text with reference and hidden words
     public string GetDisplayText()
     {
-        string result = _reference.GetDisplayText() + "\n";
+        string scriptureText = _reference.GetDisplayText() + " ";
         foreach (Word word in _words)
         {
-            result += word.GetDisplayText() + " ";
+            scriptureText += word.GetDisplayText() + " ";
         }
-        return result.Trim();
+        return scriptureText.Trim();
     }
 
+    // Method to hide a specified number of random words
     public void HideRandomWords(int numberToHide)
     {
         Random random = new Random();
@@ -33,15 +43,16 @@ class Scripture
 
         while (hiddenCount < numberToHide)
         {
-            int index = random.Next(_words.Count);
-            if (!_words[index].IsHidden())
+            int randomIndex = random.Next(_words.Count);
+            if (!_words[randomIndex].IsHidden())
             {
-                _words[index].Hide();
+                _words[randomIndex].Hide();
                 hiddenCount++;
             }
         }
     }
 
+    // Method to check if all words are hidden
     public bool IsCompletelyHidden()
     {
         foreach (Word word in _words)
@@ -52,18 +63,5 @@ class Scripture
             }
         }
         return true;
-    }
-
-    public string GetHint()
-    {
-        List<string> hints = new List<string>();
-        foreach (Word word in _words)
-        {
-            if (word.IsHidden())
-            {
-                hints.Add(word.GetHint());
-            }
-        }
-        return string.Join(" ", hints);
     }
 }

@@ -1,50 +1,36 @@
 using System;
-using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
-        ScriptureLibrary library = new ScriptureLibrary();
-        Console.WriteLine("Welcome to the Scripture Memorizer Program!");
-        Console.WriteLine("Please choose a scripture to memorize:");
-        library.DisplayScriptures();
+        // Create the scripture reference and text
+        Reference reference = new Reference("Proverbs", 3, 5, 6);
+        string scriptureText = "Trust in the Lord with all thine heart and lean not unto thine own understanding.";
 
-        int choice = int.Parse(Console.ReadLine());
-        Scripture scripture = library.GetScripture(choice);
+        // Create the Scripture object
+        Scripture scripture = new Scripture(reference, scriptureText);
 
-        Console.WriteLine("Choose a difficulty level (1 = Easy, 2 = Medium, 3 = Hard):");
-        int difficulty = int.Parse(Console.ReadLine());
-        int wordsToHide = difficulty == 1 ? 1 : difficulty == 2 ? 3 : 5;
-
+        // Main program loop
         while (true)
         {
             Console.Clear();
             Console.WriteLine(scripture.GetDisplayText());
-            Console.WriteLine("\nPress Enter to hide words or type 'hint' for help. Type 'quit' to exit.");
-            string input = Console.ReadLine().ToLower();
+            Console.WriteLine("\nPress Enter to hide words or type 'quit' to exit.");
 
-            if (input == "quit")
+            string input = Console.ReadLine();
+            if (input.ToLower() == "quit")
             {
-                Console.WriteLine("Goodbye!");
                 break;
             }
-            else if (input == "hint")
+
+            scripture.HideRandomWords(3);
+
+            if (scripture.IsCompletelyHidden())
             {
-                Console.WriteLine("Hint: " + scripture.GetHint());
-                Console.WriteLine("Press Enter to continue...");
-                Console.ReadLine();
-            }
-            else
-            {
-                scripture.HideRandomWords(wordsToHide);
-                if (scripture.IsCompletelyHidden())
-                {
-                    Console.Clear();
-                    Console.WriteLine("Congratulations! You have memorized the scripture:");
-                    Console.WriteLine(scripture.GetDisplayText());
-                    break;
-                }
+                Console.Clear();
+                Console.WriteLine("All words are hidden.");
+                break;
             }
         }
     }

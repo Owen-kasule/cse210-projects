@@ -1,73 +1,37 @@
-using System;
-using System.Collections.Generic;
-
-public class Scripture
+public class Word
 {
-    private Reference _reference;
-    private List<Word> _words;
+    private string _text;
+    private bool _isHidden;
 
-    // Constructor to initialize the Scripture with a reference and text
-    public Scripture(Reference reference, string text)
+    // Constructor to initialize a word
+    public Word(string text)
     {
-        _reference = reference;
-        _words = new List<Word>();
-        SetWords(text);
+        _text = text;
+        _isHidden = false;
     }
 
-    // Method to set words by splitting the input text and creating Word objects
-    private void SetWords(string text)
+    // Method to hide the word
+    public void Hide()
     {
-        string[] wordsArray = text.Split(' ');
-        foreach (string word in wordsArray)
-        {
-            _words.Add(new Word(word));
-        }
+        _isHidden = true;
     }
 
-    // Method to get the full scripture text with reference and hidden words
+    // Method to check if the word is hidden
+    public bool IsHidden()
+    {
+        return _isHidden;
+    }
+
+    // Method to get the display text of the word
     public string GetDisplayText()
     {
-        string scriptureText = _reference.GetDisplayText() + " ";
-        foreach (Word word in _words)
+        if (_isHidden)
         {
-            scriptureText += word.GetDisplayText() + " ";
+            return new string('_', _text.Length);
         }
-        return scriptureText.Trim();
-    }
-
-    // Method to hide a specified number of random words
-    public void HideRandomWords(int numberToHide)
-    {
-        Random random = new Random();
-        int hiddenCount = 0;
-
-        while (hiddenCount < numberToHide)
+        else
         {
-            int randomIndex = random.Next(_words.Count);
-            if (!_words[randomIndex].IsHidden())
-            {
-                _words[randomIndex].Hide();
-                hiddenCount++;
-            }
+            return _text;
         }
-    }
-
-    // Method to check if all words are hidden
-    public bool IsCompletelyHidden()
-    {
-        foreach (Word word in _words)
-        {
-            if (!word.IsHidden())
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // Method to get the reference (added to resolve the missing method error)
-    public string GetReference()
-    {
-        return _reference.GetDisplayText();
     }
 }
