@@ -36,7 +36,7 @@ class Program
             {
                 Console.Clear();
                 Console.WriteLine(selectedScripture.GetDisplayText());
-                Console.WriteLine("\nAll words are hidden. Well done!");
+                Console.WriteLine("\nAll words are hidden. Well done");
                 break;
             }
         }
