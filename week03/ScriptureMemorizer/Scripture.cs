@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-public class Scripture
+class Scripture
 {
     private Reference _reference;
     private List<Word> _words;
@@ -9,54 +10,36 @@ public class Scripture
     public Scripture(Reference reference, string text)
     {
         _reference = reference;
-        _words = new List<Word>();
-        SetWords(text);
+        _words = text.Split(' ').Select(word => new Word(word)).ToList();
     }
 
-    private void SetWords(string text)
+    public string GetReference()
     {
-        string[] wordsArray = text.Split(' ');
-        foreach (string word in wordsArray)
-        {
-            _words.Add(new Word(word));
-        }
+        return _reference.GetDisplayText();
     }
 
     public string GetDisplayText()
     {
-        string scriptureText = _reference.GetDisplayText() + " ";
-        foreach (Word word in _words)
-        {
-            scriptureText += word.GetDisplayText() + " ";
-        }
-        return scriptureText.Trim();
+        return $"{_reference.GetDisplayText()} - {string.Join(" ", _words.Select(w => w.GetDisplayText()))}";
     }
 
-    public void HideRandomWords(int numberToHide)
+    public void HideRandomWords(int count)
     {
-        Random random = new Random();
-        int hiddenCount = 0;
+        Random rand = new Random();
+        List<Word> visibleWords = _words.Where(w => !w.IsHidden()).ToList();
 
-        while (hiddenCount < numberToHide)
+        if (visibleWords.Count == 0) return;
+
+        for (int i = 0; i < count && visibleWords.Count > 0; i++)
         {
-            int randomIndex = random.Next(_words.Count);
-            if (!_words[randomIndex].IsHidden())
-            {
-                _words[randomIndex].Hide();
-                hiddenCount++;
-            }
+            int index = rand.Next(visibleWords.Count);
+            visibleWords[index].Hide();
+            visibleWords.RemoveAt(index);
         }
     }
 
     public bool IsCompletelyHidden()
     {
-        foreach (Word word in _words)
-        {
-            if (!word.IsHidden())
-            {
-                return false;
-            }
-        }
-        return true;
+        return _words.All(w => w.IsHidden());
     }
 }
