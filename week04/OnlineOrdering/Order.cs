@@ -8,7 +8,7 @@ public class Order
 
     public Order(Customer customer)
     {
-        _products = new List<Product>();
+        _products = new List<Product>(); // Initialize List
         _customer = customer;
     }
 
@@ -24,7 +24,7 @@ public class Order
         {
             total += product.GetTotalCost();
         }
-        total += _customer.IsInUSA() ? 5 : 35;
+        total += _customer.IsInUSA() ? 5 : 35; // Shipping cost based on location
         return total;
     }
 
