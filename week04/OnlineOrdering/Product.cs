@@ -16,6 +16,7 @@ public class Product
         _quantity = quantity;
     }
 
+    // Calculate the total cost of the product
     public double GetTotalCost()
     {
         return _price * _quantity;
