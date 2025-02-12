@@ -28,11 +28,12 @@ public class Video
 
     public void DisplayVideoDetails()
     {
-        Console.WriteLine($"Title: {_title}");
-        Console.WriteLine($"Author: {_author}");
-        Console.WriteLine($"Length: {_lengthInSeconds} seconds");
-        Console.WriteLine($"Number of Comments: {GetNumberOfComments()}");
-        Console.WriteLine("Comments:");
+        Console.WriteLine($"🎬 Video: {_title}");
+        Console.WriteLine($"👤 Author: {_author}");
+        Console.WriteLine($"⏳ Duration: {_lengthInSeconds} seconds");
+        Console.WriteLine($"💬 Comments: {GetNumberOfComments()}");
+        Console.WriteLine("------------------------------------------------");
+
         foreach (var comment in _comments)
         {
             comment.DisplayComment();
