@@ -3,10 +3,12 @@ public class BadHabitGoal : Goal
     public BadHabitGoal(string name, string description, int penalty)
         : base(name, description, -penalty) { }
 
-    public override void RecordEvent()
+    public override int RecordEvent() // Now returns int
     {
-        Console.WriteLine($"⚠️ Bad habit triggered: '{_name}'. Lost {_points} points.");
+        _points -= 10;
+        return -10; // Return the points lost
     }
+
 
     public override bool IsComplete()
     {

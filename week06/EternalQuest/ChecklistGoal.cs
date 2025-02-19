@@ -4,26 +4,18 @@ public class ChecklistGoal : Goal
     private int _target;
     private int _bonus;
 
-    public ChecklistGoal(string name, string description, int points, int target, int bonus)
+    public ChecklistGoal(string name, string description, int points, int target, int bonus, int amountCompleted = 0)
         : base(name, description, points)
     {
-        _amountCompleted = 0;
         _target = target;
         _bonus = bonus;
+        _amountCompleted = amountCompleted;
     }
 
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
         _amountCompleted++;
-        int earnedPoints = _points;
-
-        if (_amountCompleted == _target)
-        {
-            earnedPoints += _bonus;
-            Console.WriteLine($"🎉 Goal '{_name}' fully completed! Bonus +{_bonus} points.");
-        }
-
-        Console.WriteLine($"📌 Recorded progress for '{_name}'. +{earnedPoints} points.");
+        return _amountCompleted >= _target ? _points + _bonus : _points;
     }
 
     public override bool IsComplete()
@@ -33,11 +25,11 @@ public class ChecklistGoal : Goal
 
     public override string GetDetailsString()
     {
-        return base.GetDetailsString() + $" ✅ {_amountCompleted}/{_target}";
+        return $"{(_amountCompleted >= _target ? "[X]" : "[ ]")} {_name} ({_description}) -- Completed {_amountCompleted}/{_target} times";
     }
 
     public override string GetStringRepresentation()
     {
-        return $"ChecklistGoal:{_name},{_description},{_points},{_target},{_bonus},{_amountCompleted}";
+        return $"ChecklistGoal,{_name},{_description},{_points},{_target},{_bonus},{_amountCompleted}";
     }
 }

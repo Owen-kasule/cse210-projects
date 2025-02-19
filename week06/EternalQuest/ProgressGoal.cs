@@ -21,10 +21,12 @@ public class ProgressGoal : Goal
         }
     }
 
-    public override void RecordEvent()
+        public override int RecordEvent() // Match return type with base class
     {
-        Console.WriteLine($"⚠️ Use 'AddProgress()' method for this goal.");
+        _progress++;
+        return _points; // Return the points earned for progress
     }
+
 
     public override bool IsComplete()
     {
