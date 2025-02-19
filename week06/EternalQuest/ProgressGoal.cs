@@ -20,7 +20,7 @@ public class ProgressGoal : Goal
 
         if (IsComplete())
         {
-            Console.WriteLine($"🎯 Goal '{_name}' fully completed! +{_points} points.");
+            Console.WriteLine($"🎯 Goal '{_name}' fully completed +{_points} points.");
             return _points * 2; // Example bonus for full completion
         }
 
