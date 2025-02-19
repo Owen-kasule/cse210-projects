@@ -1,3 +1,5 @@
+using System;
+
 public class ProgressGoal : Goal
 {
     private double _currentProgress;
@@ -10,23 +12,20 @@ public class ProgressGoal : Goal
         _goalTarget = goalTarget;
     }
 
-    public void AddProgress(double progress)
+    public override int RecordEvent()
     {
-        _currentProgress += progress;
-        Console.WriteLine($"📊 Progress updated for '{_name}'. {Math.Min(_currentProgress, _goalTarget)}/{_goalTarget} completed.");
+        _currentProgress++; // Increment progress
 
-        if (_currentProgress >= _goalTarget)
+        Console.WriteLine($"📊 Progress updated for '{_name}': {_currentProgress}/{_goalTarget} completed.");
+
+        if (IsComplete())
         {
             Console.WriteLine($"🎯 Goal '{_name}' fully completed! +{_points} points.");
+            return _points * 2; // Example bonus for full completion
         }
-    }
 
-        public override int RecordEvent() // Match return type with base class
-    {
-        _progress++;
-        return _points; // Return the points earned for progress
+        return _points;
     }
-
 
     public override bool IsComplete()
     {
