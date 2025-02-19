@@ -1,0 +1,2 @@
+4
+SimpleGoal,Home,Be at home everyday,2,True
