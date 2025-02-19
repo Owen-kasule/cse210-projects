@@ -1,9 +1,15 @@
 using System;
 
-class Program
+public class Program
 {
-    static void Main(string[] args)
+    public static void Main()
     {
-        Console.WriteLine("Hello World! This is the EternalQuest Project.");
+        Console.WriteLine("🌟 Welcome to Eternal Quest! 🌟");
+        Console.WriteLine("Track your goals, level up, and stay motivated.");
+        
+        GoalManager manager = new GoalManager();
+        manager.Start();
+        
+        Console.WriteLine("Thank you for playing Eternal Quest! 🚀 Keep pushing towards your goals.");
     }
 }
